@@ -35,7 +35,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handlers.WeatherRequest"
+                            "$ref": "#/definitions/internal_handlers.WeatherRequest"
                         }
                     }
                 ],
@@ -43,7 +43,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handlers.WeatherResponse"
+                            "$ref": "#/definitions/internal_handlers.WeatherResponse"
                         }
                     },
                     "404": {
@@ -69,7 +69,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "handlers.WeatherRequest": {
+        "internal_handlers.WeatherRequest": {
             "type": "object",
             "properties": {
                 "cep": {
@@ -77,7 +77,7 @@ const docTemplate = `{
                 }
             }
         },
-        "handlers.WeatherResponse": {
+        "internal_handlers.WeatherResponse": {
             "type": "object",
             "properties": {
                 "temp_C": {
@@ -97,7 +97,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Clima API",

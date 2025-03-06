@@ -36,30 +36,23 @@ func GetWeather(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Validação do CEP (precisa ter exatamente 8 dígitos)
 	if len(req.CEP) != 8 {
 		http.Error(w, `{"message": "invalid zipcode"}`, http.StatusUnprocessableEntity)
 		return
 	}
 
-	// Obtém a cidade pelo CEP
 	city, err := services.GetCityByZip(req.CEP)
 	if err != nil {
-		http.Error(w, `{"message": "can not find zipcode "}` + err.Error(), http.StatusNotFound)
+		http.Error(w, `{"message": "can not find zipcode "}`+err.Error(), http.StatusNotFound)
 		return
 	}
 
-	// Obtém a temperatura da cidade
-	tempC, err := services.GetWeatherByCity(city)
+	tempC, err := services.GetWeatherByCity(http.DefaultClient, city)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		return
-
 		http.Error(w, `{"message": "error fetching weather"}`, http.StatusInternalServerError)
 		return
 	}
 
-	// Responde com as temperaturas
 	response := WeatherResponse{
 		TempC: tempC,
 		TempF: tempC*1.8 + 32,

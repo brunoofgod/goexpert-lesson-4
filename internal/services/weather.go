@@ -16,13 +16,13 @@ type WeatherAPIResponse struct {
 }
 
 // GetWeatherByCity consulta a WeatherAPI para obter a temperatura atual
-func GetWeatherByCity(city string) (float64, error) {
+func GetWeatherByCity(client *http.Client, city string) (float64, error) {
 	apiKey := os.Getenv("WEATHER_API_KEY")
 	if apiKey == "" {
 		return 0, fmt.Errorf("API Key não configurada")
 	}
 	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?q=%s&key=%s", url.QueryEscape(city), apiKey)
-	resp, err := http.Get(url)
+	resp, err := client.Get(url)
 	if err != nil {
 		return 0, err
 	}

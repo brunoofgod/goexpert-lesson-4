@@ -6,7 +6,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8080",
     "basePath": "/",
     "paths": {
         "/weather": {
@@ -29,7 +28,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handlers.WeatherRequest"
+                            "$ref": "#/definitions/internal_handlers.WeatherRequest"
                         }
                     }
                 ],
@@ -37,7 +36,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handlers.WeatherResponse"
+                            "$ref": "#/definitions/internal_handlers.WeatherResponse"
                         }
                     },
                     "404": {
@@ -63,7 +62,7 @@
         }
     },
     "definitions": {
-        "handlers.WeatherRequest": {
+        "internal_handlers.WeatherRequest": {
             "type": "object",
             "properties": {
                 "cep": {
@@ -71,7 +70,7 @@
                 }
             }
         },
-        "handlers.WeatherResponse": {
+        "internal_handlers.WeatherResponse": {
             "type": "object",
             "properties": {
                 "temp_C": {
